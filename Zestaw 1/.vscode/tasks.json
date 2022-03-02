@@ -1,0 +1,85 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Zadanie 1",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie1", "zadanie1.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Zadanie 2",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie2", "zadanie2.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Zadanie 3",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie3", "zadanie3.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Zadanie 4",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie4", "zadanie4.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Zadanie 5",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie5", "zadanie5.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Zadanie 6",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie6", "zadanie6.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Zadanie 7",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie7", "zadanie7.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Zadanie 8",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie8", "zadanie8.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
