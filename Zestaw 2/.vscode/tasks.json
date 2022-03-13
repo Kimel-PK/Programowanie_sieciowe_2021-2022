@@ -1,0 +1,35 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Zadanie 5",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie5", "zadanie5.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Zadanie 7",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie7", "zadanie7.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Zadanie 9",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "zadanie9", "zadanie9.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
