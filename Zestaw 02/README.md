@@ -1,4 +1,4 @@
-# Zestaw 2
+# Zestaw 02
 
 Na dzisiejszych zajęciach obowiązuje język C. Dzięki temu Wasze programy będą bezpośrednio korzystały z funkcji jądra systemu operacyjnego. Pamiętajcie o konieczności sprawdzania rezultatów przez te funkcje zwracanych!
 

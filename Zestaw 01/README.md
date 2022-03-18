@@ -1,4 +1,4 @@
-# Zestaw 1
+# Zestaw 01
 
 ## Zadanie 1
 
