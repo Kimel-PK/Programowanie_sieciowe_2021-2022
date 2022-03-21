@@ -16,17 +16,14 @@ void zamknijPolaczenie () {
 		close (gniazdko);
 }
 
-int main (int argc, char const *argv[]) {
-	
-	// pobieranie numeru portu z argumentów linii poleceń
-	int port = atoi (argv[1]);
+int main () {
 	
 	// zamykanie gniazdka w razie błędu lub przerwania Ctrl+C
 	atexit (zamknijPolaczenie);
 	
 	struct sockaddr_in adres;
     adres.sin_family = AF_INET;
-    adres.sin_port = htons(port);
+    adres.sin_port = htons(2020);
     adres.sin_addr.s_addr = htonl(INADDR_ANY);
 	
 	gniazdko = socket(AF_INET, SOCK_DGRAM, 0);
@@ -62,8 +59,6 @@ int main (int argc, char const *argv[]) {
 		// odebrano datagram
 		
 		for (int i = 0, j = 0; i < ROZMIAR_DATAGRAMU; i++) {
-			
-			printf ("pozycja %d znak %d\n", i, bufor[i]);
 			
 			// możliwym znakiem końca liczby jest spacja, \n lub \r\n
 			if (bufor[i] == ' ' || bufor[i] == '\n' || (bufor[i] == '\r' && bufor[i + 1] == '\n')) {
@@ -104,7 +99,6 @@ int main (int argc, char const *argv[]) {
 				break;
 			} else if (bufor[i] >= '0' && bufor[i] <= '9') {
 				// wczytujemy kolejną cyfrę
-				printf ("wczytano cyfre %c\n", bufor[i]);
 				odczytanaLiczba[j] = bufor[i];
 				j++;
 				// liczba przekracza ULONG_MAX na poziomie odbioru danych, zwracamy błąd
@@ -130,7 +124,6 @@ int main (int argc, char const *argv[]) {
 			}
 			
 			// odsyłamy odpowiedź
-			printf ("obliczona suma %ld, odsylanie: %s, długość datagramu: %d\n", suma, odczytanaLiczba, dlugoscOdpowiedzi);
 			if (sendto(gniazdko, odczytanaLiczba, dlugoscOdpowiedzi, 0, (struct sockaddr *)&klient, klientRozmiar) == -1) {
 				perror ("Blad sendto()");
 				exit (EXIT_FAILURE);
