@@ -24,6 +24,16 @@ Zawartość datagramów interpretujemy jako tekst w ASCII. Ciągi cyfr ASCII int
 
 Aby ułatwić ręczne testowanie serwera przy pomocy `ncat`, serwer może również akceptować datagramy mające na końcu dodatkowy znak `\n` (czyli bajt o wartości `13`) albo dwa znaki `\r\n` (bajty `10`, `13`). Serwer może wtedy, ale nie musi, dodać `\r\n` do zwracanej odpowiedzi.
 
+### Odpowiedź
+
+Specyfikacja pozostawia pewne niedopowiedzenia.
+
+Co ma zwrócić serwer kiedy otrzyma pusty datagram? Czy ma być to suma `0` czy błąd `ERROR`?
+
+Czy może wystąpić kilka spacji zaraz po sobie? Co ze spacjami na początku i końcu datagramu?
+
+Co ma zwrócić serwer w razie przepełnienia? W specyfikacji nie określono czy jest to błędem.
+
 ## Zadanie 4 (zaliczeniowe)
 
 Napisz serwer `UDP/IPv4` nasłuchujący na porcie nr `2020` i implementujący powyższy protokół.
