@@ -22,9 +22,9 @@ int main () {
 	atexit (zamknijPolaczenie);
 	
 	struct sockaddr_in adres;
-    adres.sin_family = AF_INET;
-    adres.sin_port = htons(2020);
-    adres.sin_addr.s_addr = htonl(INADDR_ANY);
+	adres.sin_family = AF_INET;
+	adres.sin_port = htons(2020);
+	adres.sin_addr.s_addr = htonl(INADDR_ANY);
 	
 	gniazdko = socket(AF_INET, SOCK_DGRAM, 0);
 	if (gniazdko == -1) {
@@ -37,23 +37,23 @@ int main () {
 		exit (EXIT_FAILURE);
 	}
 	
-    while (1) {
+	while (1) {
 		
 		struct sockaddr_in klient;
-        socklen_t klientRozmiar = sizeof(klient);
+		socklen_t klientRozmiar = sizeof(klient);
 		
 		// bufor jest o 1 większy ze względu na sprawdzanie sekwencji \r\n dla netcata
 		char bufor[ROZMIAR_DATAGRAMU + 1];
-		bufor[ROZMIAR_DATAGRAMU + 1] = '\n';
+		bufor[ROZMIAR_DATAGRAMU] = '\n';
 		unsigned long int suma = 0;
 		char odczytanaLiczba[ROZMIAR_DATAGRAMU];
 		bool czyNetcat = false;
 		bool blad = false;
 		
 		// oczekiwanie na ramkę
-        if (recvfrom(gniazdko, bufor, sizeof(bufor), 0, (struct sockaddr *)&klient, &klientRozmiar) == -1) {
+		if (recvfrom(gniazdko, bufor, sizeof(bufor), 0, (struct sockaddr *)&klient, &klientRozmiar) == -1) {
 			perror ("Blad recvfrom()");
-            exit (EXIT_FAILURE);
+			exit (EXIT_FAILURE);
 		}
 		
 		// odebrano datagram
