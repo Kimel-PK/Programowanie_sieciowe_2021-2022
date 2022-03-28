@@ -69,3 +69,7 @@ Wymień się tymi plikami z dwiema-trzema innymi osobami z grupy. Sprawdź, czy 
 ## Zadanie 5 (nieobowiązkowe)
 
 Przygotuj sobie narzędzie automatycznie testujące sumator w oparciu o powyższe pliki z zapytaniami i odpowiedziami. Na przykład prosty skrypt w języku uniksowej powłoki, wywołujący polecenia używane w poprzednich punktach. Możesz też napisać program w C albo innym języku, wczytujący te pliki oraz komunikujący się przez gniazdko z serwerem. Zanim jednak się zabierzesz za jego pisanie, to lepiej sprawdź czy w sieci nie da się znaleźć gotowego narzędzia do testowania usług UDP — wielce możliwe, że ktoś już coś takiego zaimplementował.
+
+### Tester
+
+Uruchom `serwer.c`, a następnie w innej konsoli `tester.sh`. Skrypt wyśle do serwera wszystkie pliki `testX.txt` z folderu `testy` i porówna zwrócone wartości z oczekiwanymi wynikami `wynikX.txt`.

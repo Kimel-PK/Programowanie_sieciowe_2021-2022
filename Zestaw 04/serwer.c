@@ -48,26 +48,31 @@ int main () {
 		unsigned long int suma = 0;
 		char odczytanaLiczba[ROZMIAR_DATAGRAMU];
 		bool czyNetcat = false;
+		bool czyPusty = true;
 		bool blad = false;
 		
+		int datagram = 0;
+		
 		// oczekiwanie na ramkę
-        if (recvfrom(gniazdko, bufor, sizeof(bufor), 0, (struct sockaddr *)&klient, &klientRozmiar) == -1) {
+        if ((datagram = recvfrom(gniazdko, bufor, sizeof(bufor), 0, (struct sockaddr *)&klient, &klientRozmiar)) == -1) {
 			perror ("Blad recvfrom()");
             exit (EXIT_FAILURE);
 		}
 		
 		// odebrano datagram
 		
-		for (int i = 0, j = 0; i < ROZMIAR_DATAGRAMU; i++) {
+		int i = 0;
+		
+		for (int j = 0; i <= datagram; i++) {
 			
 			// możliwym znakiem końca liczby jest spacja, \n lub \r\n
-			if (bufor[i] == ' ' || bufor[i] == '\n' || (bufor[i] == '\r' && bufor[i + 1] == '\n')) {
+			if (bufor[i] == ' ' || bufor[i] == '\n' || (bufor[i] == '\r' && bufor[i + 1] == '\n') || i == datagram) {
 				
 				// znaleziono spacje lub znak konca linii
 				
 				odczytanaLiczba[j] = '\0';
 				
-				unsigned long int przekonwertowanaLiczba = atoi (odczytanaLiczba);
+				unsigned long int przekonwertowanaLiczba = strtoul (odczytanaLiczba, '\0', 10);
 				// sprawdzamy czy odczytana liczba została poprawnie przekonwertowana na typ unsigned long int
 				unsigned long int testowanaLiczba = przekonwertowanaLiczba;
 				for (int k = j - 1; k >= 0; k--) {
@@ -85,13 +90,19 @@ int main () {
 				}
 				
 				suma += przekonwertowanaLiczba;
+				if (j > 0)
+					czyPusty = false;
 				j = 0;
 				
 				// jeśli zakończeniem linii jest \n to znaczy że odebraliśmy danę od netcata
-				if (bufor[i] == '\n') {
+				if (bufor[i] == '\n' || (bufor[i] == '\r' && bufor [i+1] == '\n')) {
 					czyNetcat = true;
 					break;
 				}
+				
+				// wymuszenie ostatniego podliczenia sumy
+				if (i == datagram)
+					break;
 				
 			} else if (bufor[i] == '\n' || (bufor[i] == '\r' && bufor[i + 1] == '\n')) {
 				// trafiliśmy na koniec datagramu wysłanego przez netcata
@@ -102,7 +113,7 @@ int main () {
 				odczytanaLiczba[j] = bufor[i];
 				j++;
 				// liczba przekracza ULONG_MAX na poziomie odbioru danych, zwracamy błąd
-				if (j == 11) {
+				if (j == 21) {
 					blad = true;
 					break;
 				}
@@ -113,14 +124,14 @@ int main () {
 			}
 		}
 		
-		if (!blad) {
+		if (!blad && i > 0 && !czyPusty) {
 			
 			// konwertujemy sumę liczb na tekst
 			int dlugoscOdpowiedzi = 0;
 			if (czyNetcat) {
-				dlugoscOdpowiedzi = sprintf(odczytanaLiczba, "%ld\n", suma);
+				dlugoscOdpowiedzi = sprintf(odczytanaLiczba, "%lu\n", suma);
 			} else {
-				dlugoscOdpowiedzi = sprintf(odczytanaLiczba, "%ld", suma);
+				dlugoscOdpowiedzi = sprintf(odczytanaLiczba, "%lu", suma);
 			}
 			
 			// odsyłamy odpowiedź
@@ -130,9 +141,16 @@ int main () {
 			}
 		} else {
 			// odsyłamy komunikat o błędzie
-			if (sendto(gniazdko, "ERROR\n", 6, 0, (struct sockaddr *)&klient, klientRozmiar) == -1) {
-				perror ("Blad sendto()");
-				exit (EXIT_FAILURE);
+			if (czyNetcat) {
+				if (sendto(gniazdko, "ERROR\n", 6, 0, (struct sockaddr *)&klient, klientRozmiar) == -1) {
+					perror ("Blad sendto()");
+					exit (EXIT_FAILURE);
+				}
+			} else {
+				if (sendto(gniazdko, "ERROR", 5, 0, (struct sockaddr *)&klient, klientRozmiar) == -1) {
+					perror ("Blad sendto()");
+					exit (EXIT_FAILURE);
+				}
 			}
 		}
     }
