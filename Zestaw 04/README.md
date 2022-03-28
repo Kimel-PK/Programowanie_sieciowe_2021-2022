@@ -73,3 +73,17 @@ Przygotuj sobie narzędzie automatycznie testujące sumator w oparciu o powyższ
 ### Tester
 
 Uruchom `serwer.c`, a następnie w innej konsoli `tester.sh`. Skrypt wyśle do serwera wszystkie pliki `testX.txt` z folderu `testy` i porówna zwrócone wartości z oczekiwanymi wynikami `wynikX.txt`.
+
+Lista testów:
+
+1. Pusty datagram (oczekiwany błąd)
+2. Kilka spacji (oczekiwany błąd)
+3. Litery zamiast cyfr (oczekiwany błąd)
+4. Maksymalna wartość `unsigned long int`
+5. Pojedyncza liczba przekraczająca `unsigned long int` (oczekiwany błąd)
+6. Kilka liczb rozdzielone kilkoma spacjami
+7. Kilka liczb stosunkowo niewiele mniejszych niż `ULONG_MAX`
+8. Przepełnienie `unsigned long int` (oczekiwany błąd)
+9. Pojedyncza litera w liczbach (oczekiwany błąd)
+10. Ciąg jednego lub większej ilości zer
+11. Suma zer
