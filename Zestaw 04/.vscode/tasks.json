@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Serwer sumujący",
+			"type": "shell",
+			"command": "gcc",
+			"args": ["-std=c99", "-pedantic", "-Wall", "-o", "serwer", "serwer.c"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
