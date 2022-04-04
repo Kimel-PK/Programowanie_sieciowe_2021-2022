@@ -46,7 +46,7 @@ int main () {
 		char bufor[ROZMIAR_DATAGRAMU + 1];
 		bufor[ROZMIAR_DATAGRAMU + 1] = '\n';
 		unsigned long int suma = 0;
-		char odczytanaLiczba[ROZMIAR_DATAGRAMU];
+		char odczytanaLiczba[22];
 		bool czyNetcat = false;
 		bool czyPusty = true;
 		bool blad = false;
@@ -129,7 +129,7 @@ int main () {
 			// konwertujemy sumę liczb na tekst
 			int dlugoscOdpowiedzi = 0;
 			if (czyNetcat) {
-				dlugoscOdpowiedzi = sprintf(odczytanaLiczba, "%lu\n", suma);
+				dlugoscOdpowiedzi = sprintf(odczytanaLiczba, "%lu\r\n", suma);
 			} else {
 				dlugoscOdpowiedzi = sprintf(odczytanaLiczba, "%lu", suma);
 			}
@@ -142,7 +142,7 @@ int main () {
 		} else {
 			// odsyłamy komunikat o błędzie
 			if (czyNetcat) {
-				if (sendto(gniazdko, "ERROR\n", 6, 0, (struct sockaddr *)&klient, klientRozmiar) == -1) {
+				if (sendto(gniazdko, "ERROR\r\n", 7, 0, (struct sockaddr *)&klient, klientRozmiar) == -1) {
 					perror ("Blad sendto()");
 					exit (EXIT_FAILURE);
 				}
