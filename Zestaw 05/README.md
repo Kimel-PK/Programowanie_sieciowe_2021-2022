@@ -1,4 +1,4 @@
-# Zestaw 04
+# Zestaw 05
 
 Od protokołów przesyłających dane w datagramach przechodzimy do protokołów korzystających z transportu strumieniowego. Dalej będziemy rozważać sumowanie liczb, ale teraz zapytania i odpowiedzi będą przesyłane za pomocą TCP.
 
