@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Serwer sumujący",
+			"type": "shell",
+			"command": "g++",
+			"args": ["-std=c++17", "-Wall", "-o", "serwer", "serwer.cpp"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
