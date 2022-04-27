@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Sprawdzanie statusu strony",
+			"type": "shell",
+			"command": "g++",
+			"args": ["-std=c++17", "-Wall", "-o", "status", "status.cpp"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
