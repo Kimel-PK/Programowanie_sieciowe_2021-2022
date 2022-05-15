@@ -2,7 +2,7 @@ import sys
 import requests
 from bs4 import BeautifulSoup
 
-zapytanie = requests.get('https://github-readme-stats.vercel.app/api?username=kimel-pk&count_private=true&include_all_commits=true', 'html.parser')
+zapytanie = requests.get('https://github-readme-stats.vercel.app/api?username=kimel-pk&count_private=true&include_all_commits=true')
 
 if zapytanie.status_code != 200:
     print('Błąd, kod statusu: ' + str(zapytanie.status_code))
