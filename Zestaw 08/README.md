@@ -1,4 +1,4 @@
-# Zestaw 07
+# Zestaw 08
 
 ## Zadanie 1
 
